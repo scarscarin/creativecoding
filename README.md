@@ -1,1 +1,1 @@
-"# creativecoding" 
+Syllabus for Creative Coding 2024/25 at I/M/D, KABK
