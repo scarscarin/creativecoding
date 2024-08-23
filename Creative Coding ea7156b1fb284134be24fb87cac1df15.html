@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Creative Coding</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 237, 214, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 237, 214, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(249, 228, 188, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ea7156b1-fb28-4134-be24-fb87cac1df15" class="page mono"><header><div class="page-header-icon undefined"><img class="icon" src="Creative%20Coding%20ea7156b1fb284134be24fb87cac1df15/0001_2.gif"/></div><h1 class="page-title">Creative Coding</h1><p class="page-description"></p></header><div class="page-body"><p id="c3349c99-0fb9-4252-8623-9f1540f89450" class=""><mark class="highlight-gray"><strong>I/M/D class of 2028, year 1</strong></mark></p><hr id="80cc35ce-f84c-4413-9086-e57d520ffc20"/><div id="6ce78e9c-6dfd-45c5-86fd-d2ced5677d86" class="column-list"><div id="a3ccbad9-dbf2-469b-9971-f47b8874216f" style="width:68.75%" class="column"><p id="17672bef-ee17-4614-bae9-441fc7f68750" class="">In the era of move-fast-break-things, modern technologies rewrite our reality, often dismissing critical reflections over <em>who</em> and <em>how</em> gets to do that rewriting.</p><p id="de86a6c7-c293-478b-87c7-995be17bea14" class="">Creative engagement is crucial to think through the implications of new tech and reclaim its design; a process that requires learning about and tinkering with the technologies ourselves.</p><p id="63fb299b-8f23-464e-b0b6-9a168b4f2891" class="">In <strong>Creative Coding</strong>, the artist  <em>makes </em>and <em>thinks </em>with algorithms, generative rules, and conditional systems. Code becomes part of the creative process, as a tool for self-<em>expressive </em>and <em>critical</em> ends.</p></div><div id="b98979e4-7188-4767-9f03-926b2d3dc749" style="width:31.250000000000007%" class="column"><figure id="39b6fa10-d77c-41af-85c8-ad0ec4362684" class="link-to-page"><a href="Creative%20Coding%20ea7156b1fb284134be24fb87cac1df15/Course%20Details%2039b6fa10d77c41af85c8ad0ec4362684.html"><span class="icon">📎</span>Course Details</a></figure><p id="b155a148-14b1-44e7-9b44-cd704e25f152" class="">📂 <a href="https://link.excalidraw.com/l/8fFb2rptKCY/qbWlVGvhZt">Excalidraw</a></p><p id="3341998c-700f-4575-bb82-b35824a9d53f" class="">📊 <mark class="highlight-default"><a href="https://docs.google.com/spreadsheets/d/1PuZKxdTZji6wXXUIprWmxXFK4qYjcRiRfFV5CJTdNuE/edit?usp=sharing">Attendance List</a></mark></p></div></div><hr id="59e54b8f-515a-45ee-a58a-6b9df5dcb4d8"/><h1 id="dc4aeeb9-4439-4992-bfd3-f9192108d68b" class="">Classes</h1><h2 id="8219263e-cd59-4d22-a8fd-b5357037db7a" class="">01. Intro to Creative Coding</h2><p id="27589559-e15e-4196-ab15-50d133c62b4e" class=""><mark class="highlight-yellow">Lecture</mark>: <a href="https://docs.google.com/presentation/d/1_9oX34kFx39fubIwXZOmfEL12LYT7Lf4pAweDv2rCb0/edit?usp=sharing">📚 A brief history of Creative Coding</a></p><p id="db059666-5dc2-47bd-81df-364f54812576" class=""><mark class="highlight-teal">Assignment</mark>: make your own demo</p><p id="e4fc43cd-5b3e-4cfc-871a-3f402149098d" class=""><mark class="highlight-blue">Tools</mark>: <a href="https://link.excalidraw.com/l/8fFb2rptKCY/qbWlVGvhZt">🔗 Excalidraw</a>, <a href="https://editor.p5js.org/">🔗 P5js</a></p><h2 id="f0faf1ea-5085-4d01-871c-9f944a93c0ae" class="">02. Algorism</h2><p id="638fe078-d456-408b-ac80-7981e4d1e388" class=""><mark class="highlight-yellow">Lecture</mark>: Algorithmic Thinking</p><p id="1b660a34-f240-4cb2-a40e-20207971f2a5" class=""><mark class="highlight-teal">Assignment</mark>: decision-making machine (group)</p><p id="32937b3e-84e8-4fe6-925a-4ab6bfa42c69" class=""><mark class="highlight-blue">Tools</mark>: P5js</p><h2 id="ce5a1d21-c3af-4875-b175-333c67d03a10" class="">03. Generative Design</h2><p id="a89b29d8-9830-48a8-aaf4-f153f796b7ec" class=""><mark class="highlight-yellow">Lecture</mark>: Generative Design</p><p id="2375296c-9c2f-40e8-8bd1-d4baea607cbc" class=""><mark class="highlight-teal">Assignment</mark>: make a (generative) pattern</p><p id="c2be9a73-1350-4eb0-86f4-9d17154d5b40" class=""><mark class="highlight-blue">Tools</mark>: P5js, printer</p><h2 id="e3045e05-3950-4e0c-b298-e33ca683eaad" class="">04. Design with Constraints</h2><p id="aecb3031-076d-4dbb-99cb-2bd3aba36bc4" class=""><mark class="highlight-yellow">Lecture</mark>: on Limits (in design, in computation, in resources)</p><p id="210327dd-b93b-4adb-99e8-e090f6df7b86" class=""><mark class="highlight-teal">Assignment</mark>: one-button website (group)</p><p id="f7babace-3d49-4d93-88f9-4b1b99185258" class=""><mark class="highlight-blue">Tools</mark>: P5js</p><h2 id="8a6e1a00-130b-493f-85ba-8a7947bc7f59" class="">05. Body as Interface</h2><p id="4174761a-980f-4ef8-8cb1-a372c52c2a4a" class=""><mark class="highlight-yellow">Lecture</mark>: The Body as Interface</p><p id="f5d344ee-376e-4e73-891b-fcb4ae84e079" class=""><mark class="highlight-teal">Assignment</mark>: make a digital theremin</p><p id="53a13939-0c0b-49a4-a45e-964076de8e48" class=""><mark class="highlight-blue">Tools</mark>: TouchDesigner, mediapipe</p><h2 id="a5902933-7137-4d42-b82b-633df05cae25" class="">06. Illuminated Interventions</h2><p id="b632335d-aad9-48ea-a652-2bb5bc62fa87" class=""><mark class="highlight-yellow">Lecture</mark>: coding in situ</p><p id="758e43d7-2a8b-48aa-812d-959ac0c453ca" class=""><mark class="highlight-teal">Assignment</mark>: illuminated interventions (projection mapping)</p><p id="7242e1ce-7389-4dcc-a221-e43b03d6674d" class=""><mark class="highlight-blue">Tools</mark>: TouchDesigner, beamer</p><h2 id="4e1facbd-688b-4437-803a-f0421a259641" class="">07. Datasets</h2><p id="2cc16cba-727b-45bc-9c4d-9eba004dc408" class=""><mark class="highlight-yellow">Lecture</mark>: Weapons of Math Destruction</p><p id="42f7093f-e1dd-4adb-825d-7dd6499e809f" class=""><mark class="highlight-teal">Assignment</mark>: data self-portrait</p><p id="1e98b6c8-7e3c-4198-9d58-4e61a5db512d" class=""><mark class="highlight-blue">Tools</mark>: free</p><h2 id="7a0866f9-3be4-4f61-8f33-f94a9e978920" class="">08. Task Manager (1)</h2><p id="cd64b489-e1fa-4fbe-b5c8-047b46ada829" class=""><mark class="highlight-yellow">Lecture</mark>: the computer has a vision and the machine is learning</p><p id="1b530713-3772-44f4-a8f7-0be99616eb3d" class=""><mark class="highlight-teal">Assignment</mark>: train your laptop</p><p id="73d722d3-b3a5-4d2f-8d67-dffa707435ab" class=""><mark class="highlight-blue">Tools</mark>: free</p><h2 id="c57d85e4-ce2b-45ab-a6fe-f7be7bc19220" class="">09. Task Manager (2)</h2><p id="69659dcc-498b-4868-9aaa-314d1e692f2b" class=""><mark class="highlight-yellow">Lecture</mark>: Presentations and feedback + autonomous work</p><h2 id="99f01096-8faf-450a-9569-b7e14463eef7" class="">10. Measuring</h2><p id="88adb6a0-f833-4fb3-87b8-70f04b9685b5" class=""><mark class="highlight-yellow">Lecture</mark>: on Measuring</p><p id="8dca65c9-6ebe-49a3-ae2d-08cea14b1aec" class=""><mark class="highlight-teal">Assignment</mark>: design a measuring device</p><p id="a2761afb-041c-4c0f-8efb-60683b062bd3" class=""><mark class="highlight-blue">Tools</mark>: free</p><h2 id="92e38543-d0a6-4ff1-8bb3-a975d4066e01" class="">11. Guest Lecture</h2><p id="61ff9ab8-fb52-4607-97cf-f4212fa35b9e" class=""><mark class="highlight-yellow">Lecture</mark>: guest lecture</p><h2 id="88e28a16-604e-481d-97de-4666648e3e5a" class="">12. V2_Lab Visit</h2><p id="e76f7d7d-cf7c-4108-8ec8-6a62b47d995a" class=""><mark class="highlight-yellow">Lecture</mark>: visit at V2_Lab in Rotterdam</p><p id="f44d4d36-43cc-4a0a-819c-5672bddb89aa" class=""><mark class="highlight-teal">Assignment</mark>: draft a reaction to the gallery visit</p><p id="3ae8ba8a-61ef-4e34-a134-c3ff05de1011" class=""><mark class="highlight-blue">Tools</mark>: free</p><h2 id="21cc2a02-813a-4645-9001-3c755af6d448" class="">13. Individuals</h2><p id="8cd414aa-300f-4838-9876-dc34d3fe57da" class="">In-class presentations</p><p id="37d767eb-0fc2-42f6-b848-ec4d6eff6a01" class="">
+</p><hr id="bf0a72fb-c8d5-4358-8db6-14ce67fcd7a0"/><h2 id="36f80025-92b6-47a0-9094-b5b57478f9ba" class="">Lecturer</h2><figure id="9624e204-dc79-4ea3-9ff0-690dee2cdda9" class="block-color-purple_background link-to-page"><a href="Creative%20Coding%20ea7156b1fb284134be24fb87cac1df15/Leo%20Scarin%209624e204dc794ea39ff0690dee2cdda9.html"><img class="icon" src="Creative%20Coding%20ea7156b1fb284134be24fb87cac1df15/Leo%20Scarin%209624e204dc794ea39ff0690dee2cdda9/leo.gif"/>Leo Scarin</a></figure><figure class="block-color-purple_background callout" style="white-space:pre-wrap;display:flex" id="c3de1b38-73c8-490a-b3e6-952ee425afd6"><div style="font-size:1.5em"><span class="icon">📬</span></div><div style="width:100%">mailto: <mark class="highlight-blue"><a href="mailto:l.scarin@kabk.nl">l.scarin@kabk.nl</a></mark><mark class="highlight-blue"><br/><br/></mark>website:<mark class="highlight-blue"> </mark><mark class="highlight-blue"><a href="http://leoscarin.com">leoscarin.com</a></mark><mark class="highlight-blue"><br/><br/></mark>availability: <mark class="highlight-red">Monday to Thursday 9h30-16h30, email response within 48h</mark></div></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
